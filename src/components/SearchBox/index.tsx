@@ -1,16 +1,17 @@
 import Image from 'next/image';
+import styles from '../../styles/components/SearchBox.module.scss';
 
 export function SearchBox() {
   return (
-    <header>
+    <header className={styles.header}>
       <section>
         <Image
           src='/images/Logo_ML.png'
-          width='50'
-          height='35'
+          width='53'
+          height='36'
           alt='Mercado Livre Brasil - Onde comprar e vender de Tudo'
         />
-        <div>
+        <div className={styles.search}>
           <input type='text' />
           <button>
             <Image
