@@ -1,5 +1,5 @@
+import Image from 'next/image';
 import styles from '../../styles/components/SearchBox.module.scss';
-import { Image } from '../Image';
 
 export function SearchBox() {
   return (
@@ -10,7 +10,6 @@ export function SearchBox() {
           width='53'
           height='36'
           alt='Mercado Livre Brasil - Onde comprar e vender de Tudo'
-          className={styles.logo}
         />
         <div className={styles.search}>
           <input type='text' />
