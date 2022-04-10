@@ -51,8 +51,6 @@ const Product = ({ item }: ProductProp) => {
   );
 };
 
-export default Product;
-
 type getItems = {
   items: Item[];
 };
@@ -60,13 +58,15 @@ type getItems = {
 export async function getStaticPaths() {
   const response = await api.get<getItems>('/api/items?search=:query');
 
+  const ids = response.data.items.map((item) => ({
+    params: {
+      id: item.id,
+    },
+  }));
+
   return {
-    paths: response.data.items.map((item) => ({
-      params: {
-        id: item.id,
-      },
-    })),
-    fallback: true,
+    paths: ids.slice(0, 1),
+    fallback: false,
   };
 }
 
@@ -86,3 +86,5 @@ export async function getStaticProps({ params }: Params) {
     revalidate: 5 * 60, // 5 minutos
   };
 }
+
+export default Product;

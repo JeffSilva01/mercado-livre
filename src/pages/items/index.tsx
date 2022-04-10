@@ -19,13 +19,6 @@ type Item = {
   state: string;
 };
 
-type SellerAddress = {
-  state: {
-    id: string;
-    name: string;
-  };
-};
-
 const Items: NextPage = () => {
   const [products, setProducts] = useState<Item[]>([]);
   const { query } = useRouter();
