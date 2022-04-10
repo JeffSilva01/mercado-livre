@@ -27,9 +27,13 @@
   justify-content: center;
 
   input {
-    flex: 1;
     height: 35px;
+
+    font-size: 18px;
+
+    flex: 1;
     padding: 0 10px;
+
     border-radius: 5px 0 0 5px;
     outline-color: $yellow-500;
   }
