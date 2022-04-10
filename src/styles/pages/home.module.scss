@@ -1,0 +1,11 @@
+@import '../settings/_settings';
+
+.container {
+  max-width: 1200px;
+
+  margin: 50px auto 20px;
+  padding: 16px;
+  border-radius: 8px;
+
+  background: $white;
+}
