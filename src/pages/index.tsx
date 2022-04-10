@@ -1,5 +1,5 @@
+import axios from 'axios';
 import { ProductCard } from '../components/ProductCard';
-import api from '../services/api';
 import styles from '../styles/pages/home.module.scss';
 
 type ProductProps = {
@@ -34,7 +34,7 @@ const Home = ({ items }: ProductProps) => {
 export default Home;
 
 export async function getServerSideProps() {
-  const response = await api.get('/api/items?search=:query');
+  const response = await axios.get('/api/items?search=:query');
 
   return {
     props: {

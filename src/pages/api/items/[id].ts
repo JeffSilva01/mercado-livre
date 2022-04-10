@@ -1,15 +1,15 @@
+import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
-import api from '../../../services/api';
 
 export default async function getItem(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
   try {
-    const itemResponse = await api.get(
+    const itemResponse = await axios.get(
       `https://api.mercadolibre.com/items/${request.query.id}`
     );
-    const descriptionResponse = await api.get(
+    const descriptionResponse = await axios.get(
       `https://api.mercadolibre.com/items/${request.query.id}/description`
     );
 

@@ -1,5 +1,5 @@
+import axios from 'axios';
 import Image from 'next/image';
-import api from '../../services/api';
 import styles from '../../styles/pages/product-items.module.scss';
 
 type ProductProp = {
@@ -56,7 +56,9 @@ type getItems = {
 };
 
 export async function getStaticPaths() {
-  const response = await api.get<getItems>('/api/items?search=:query');
+  const response = await axios.get<getItems>(
+    'https://mercado-pago.vercel.app/api/items?search=:query'
+  );
 
   const ids = response.data.items.map((item) => ({
     params: {
@@ -77,7 +79,9 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const response = await api.get(`/api/items/${params.id}`);
+  const response = await axios.get(
+    `https://mercado-pago.vercel.app/api/items/${params.id}`
+  );
 
   return {
     props: {

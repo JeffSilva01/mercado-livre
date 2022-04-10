@@ -1,8 +1,8 @@
+import axios from 'axios';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { ProductCard } from '../../components/ProductCard';
-import api from '../../services/api';
 import styles from '../../styles/pages/home.module.scss';
 
 type Item = {
@@ -25,7 +25,9 @@ const Items: NextPage = () => {
 
   useEffect(() => {
     async function getProducts() {
-      const response = await api.get(`/api/items?search=${query.search}`);
+      const response = await axios.get(
+        `https://mercado-pago.vercel.app/api/items?search=${query.search}`
+      );
       setProducts(response.data.results);
     }
 

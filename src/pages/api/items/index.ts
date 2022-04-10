@@ -1,5 +1,5 @@
+import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
-import api from '../../../services/api';
 
 type ResponseType = {
   results: Item[];
@@ -30,7 +30,7 @@ export default async function getItem(
   response: NextApiResponse
 ) {
   try {
-    const searchResponse = await api.get<ResponseType>(
+    const searchResponse = await axios.get<ResponseType>(
       `https://api.mercadolibre.com/sites/MLA/search?q=${request.query.search}`
     );
 
