@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { ProductCard } from '../components/ProductCard';
+import { api } from '../services/api';
 import styles from '../styles/pages/home.module.scss';
 
-type ProductProps = {
+type HomeProps = {
   items: Item[];
-  categories: String[];
+  categories: string[];
 };
 
 type Item = {
@@ -21,7 +21,7 @@ type Item = {
   state: string;
 };
 
-const Home = ({ items }: ProductProps) => {
+const Home = ({ items }: HomeProps) => {
   return (
     <div className={styles.container}>
       {items.map((item) => (
@@ -33,13 +33,63 @@ const Home = ({ items }: ProductProps) => {
 
 export default Home;
 
-export async function getServerSideProps() {
-  const response = await axios.get('/api/items?search=:query');
+type GetItemsResponse = {
+  results: Result[];
+  available_filters: AvailableFilter[];
+};
 
+type AvailableFilter = {
+  id: string;
+  values: FilterValues[];
+};
+
+type FilterValues = {
+  name: string;
+};
+
+type Result = {
+  id: string;
+  title: string;
+  thumbnail: string;
+  condition: string;
+  shipping: Shipping;
+  address: Address;
+  price: number;
+};
+
+type Address = {
+  state_name: string;
+};
+
+type Shipping = {
+  free_shipping: true;
+};
+
+export async function getServerSideProps() {
+  const response = await api.get<GetItemsResponse>(
+    '/sites/MLB/search?q=:query'
+  );
+
+  const items = response.data.results.map((item) => {
+    const [amount, decimals] = item.price.toString().split('.');
+
+    return {
+      id: item.id,
+      title: item.title,
+      pictures: item.thumbnail,
+      condition: item.condition,
+      state: item.address.state_name,
+      freeShipping: item.shipping.free_shipping,
+      price: {
+        amount: Number(amount),
+        decimals: decimals ? Number(decimals) : 0,
+        currency: 'R$',
+      },
+    };
+  });
   return {
     props: {
-      items: response.data.items,
-      categories: response.data.categories,
+      items,
     },
   };
 }

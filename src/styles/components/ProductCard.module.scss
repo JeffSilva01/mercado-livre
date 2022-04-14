@@ -9,11 +9,11 @@
     border-top: 1px solid $gray-200;
   }
 
-  // span {
-  //   font-size: 12px;
-  //   margin: 16px 128px auto auto;
-  //   display: block;
-  // }
+  > span {
+    font-size: 12px;
+    margin: 16px 128px auto auto;
+    display: block;
+  }
 }
 
 .productImage {
@@ -36,10 +36,4 @@
   span {
     margin-right: 5px;
   }
-}
-
-.andesMoneyAmount__cents {
-  font-size: 22px;
-  align-self: flex-start;
-  margin-top: 5px;
 }

@@ -32,11 +32,9 @@ export function ProductCard({ item }: ProductCardProps) {
       />
       <div className={styles.sectionDetail}>
         <p className={styles.andesMoneyAmount}>
-          <span>{item.price.currency}</span>
-          <span>{item.price.amount}</span>
-          <span className={styles.andesMoneyAmount__cents}>
-            {item.price.decimals && '00'}
-          </span>
+          <span>{item?.price?.currency}</span>
+          <span>{item?.price?.amount}</span>
+          <span>,{item?.price?.decimals?.toString().padEnd(2, '0')}</span>
           {item.free_shipping && (
             <Image
               src='/images/ic_shipping.png'
@@ -50,7 +48,7 @@ export function ProductCard({ item }: ProductCardProps) {
         <Link href={`/items/${item.id}`}>
           <a>{item.title}</a>
         </Link>
-        <p>{item.condition}</p>
+        <p>{item.condition === 'new' && 'Novo'}</p>
       </div>
       <span>{item.state}</span>
     </div>
