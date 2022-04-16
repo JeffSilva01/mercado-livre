@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import { ProductCard } from '../components/ProductCard';
 import { api } from '../services/api';
 import styles from '../styles/pages/home.module.scss';
@@ -65,9 +66,11 @@ type Shipping = {
   free_shipping: true;
 };
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const page = context.query.page || '0';
+
   const response = await api.get<GetItemsResponse>(
-    '/sites/MLB/search?q=:query'
+    `/sites/MLB/search?q=:query&offset=${page}`
   );
 
   const items = response.data.results.map((item) => {
@@ -92,4 +95,4 @@ export async function getServerSideProps() {
       items,
     },
   };
-}
+};
