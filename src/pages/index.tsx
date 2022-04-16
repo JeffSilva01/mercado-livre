@@ -68,9 +68,10 @@ type Shipping = {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const page = context.query.page || '0';
+  const search = context.query.search || ':query';
 
   const response = await api.get<GetItemsResponse>(
-    `/sites/MLB/search?q=:query&offset=${page}`
+    `/sites/MLB/search?q=${search}&offset=${page}`
   );
 
   const items = response.data.results.map((item) => {

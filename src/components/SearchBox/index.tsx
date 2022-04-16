@@ -9,7 +9,7 @@ export function SearchBox() {
 
   function pushSearch() {
     const inputSearchValue = inputSearchRef?.current?.value;
-    router.push(`/items?search='${inputSearchValue}`);
+    router.push(`/?search='${inputSearchValue}`);
   }
 
   return (
