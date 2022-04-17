@@ -6,9 +6,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <SearchBox />
-      <div className='container'>
-        <Component {...pageProps} />
-      </div>
+      <Component {...pageProps} />
     </>
   );
 }
